@@ -1,0 +1,58 @@
+name: Personal professional website API
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: node:20
+    steps:
+      - uses: actions/checkout@v6.0.1
+
+#      - name: Make envfile
+#        uses: aasmal97/create-env-file@v3.1.2
+#        with:
+#          APP_SECRETS: ${{toJson(secrets)}}
+#          ENV_FILE_NAME: ".env"
+#          DESTINATION_PATH: ${{ github.workspace }}/src
+
+      - name: Make env file
+        uses: SpicyPizza/create-envfile@v2.0
+        with:
+          envkey_DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          envkey_OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          envkey_OPENAI_ORG_ID: ${{ secrets.OPENAI_ORG_ID }}
+          envkey_OPENAI_PROJECT_ID: ${{ secrets.OPENAI_PROJECT_ID }}
+          envkey_LOG_LEVEL: "INFO"
+          envkey_SMTP_HOST: "smtp.gmail.com"
+          envkey_SMTP_PORT: "587"
+          envkey_SMTP_USER: "dwalbeck3@gmail.com"
+          envkey_SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          envkey_EMAIL_TO: "daveywalbeck@gmail.com"
+          file_name: '.env'
+
+      - name: copy files to web server
+        uses: appleboy/scp-action@v1
+        with:
+          host: 54.237.75.43
+          username: deploy
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          source: ./*
+          target: /var/www/personal_api/
+
+      - name: build packages start API
+        uses: fifsky/ssh-action@master
+        with:
+          command: |
+            cd /var/www/personal_api
+            pip install -r requirements.txt
+            gunicorn main:app -c gunicorn.conf.py
+          host: 54.237.75.43
+          port: 22
+          user: deploy
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+
