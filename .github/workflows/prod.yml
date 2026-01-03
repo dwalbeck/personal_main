@@ -1,0 +1,59 @@
+name: Personal professional website
+
+concurrency: production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: production
+    container: node:20
+    steps:
+      - uses: actions/checkout@v6.0.1
+
+      - name: install node modules
+        run: npm install
+
+#      - name: Make envfile
+#        uses: aasmal97/create-env-file@v3.1.2
+#        with:
+#          APP_SECRETS: ${{toJson(secrets)}}
+#          ENV_FILE_NAME: ".env"
+#          DESTINATION_PATH: ${{ github.workspace }}/src
+
+      - name: create env file
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > .env
+
+      - name: compile the code
+        run: npm run build
+
+      - name: backup current code
+        uses: fifsky/ssh-action@master
+        with:
+          command: |
+            cd /var/www/personal_site
+            rm -rf ./backup
+            mv ./dist ./backup
+          host: 54.237.75.43
+          user: deploy
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: copy files to web server
+        uses: appleboy/scp-action@v1
+        with:
+          host: "54.237.75.43"
+          username: "deploy"
+          key: ${{secrets.SSH_PRIVATE_KEY}}
+          port: "22"
+          source: "./dist/*"
+          target: "/var/www/personal_site/"
+
+      - name: show env
+        run: |
+          cat .env
+
