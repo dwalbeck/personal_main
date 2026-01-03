@@ -1,0 +1,30 @@
+[Unit]
+Description=Portfolio API Service
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=notify
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/portfolio/backend
+Environment="PATH=/opt/portfolio/backend/venv/bin"
+EnvironmentFile=/opt/portfolio/backend/.env
+ExecStart=/opt/portfolio/backend/venv/bin/gunicorn main:app \
+    --workers 4 \
+    --worker-class uvicorn.workers.UvicornWorker \
+    --bind 0.0.0.0:8000 \
+    --timeout 120 \
+    --graceful-timeout 30 \
+    --access-logfile /var/log/portfolio-api/access.log \
+    --error-logfile /var/log/portfolio-api/error.log \
+    --log-level info
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=30
+PrivateTmp=true
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
