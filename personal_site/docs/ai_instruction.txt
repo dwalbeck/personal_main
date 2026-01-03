@@ -1,0 +1,135 @@
+# ***** Claude Code Instructions *************************************************************************
+
+Let's start by adding some logging to the backend. Use logging capable of using log levels to define log entries and a configurable log level that the application runs at.  It should also write the log entries to a file located in the backend document root called api.log. Add logging entries for the startup of the application and each of the endpoints when started and completed.
+
+# --------------------------------------------------------------------------------------------------------
+
+When the backend service starts, I see the following error:
+
+    ERROR:    Error loading ASGI app. Could not import module "main".
+    
+Also the "api.log" file is not being created or written to for logging.
+
+# --------------------------------------------------------------------------------------------------------
+
+The database should startup by executing the db/initdb/setup.sh script, which installs the extension and creates the necessary DB table.  Please check this over and insure that the DB is being correctly started.
+
+# --------------------------------------------------------------------------------------------------------
+
+On the frontend app, there is a section called "Interests", which I'd like to change a few things. Each card is created using a label and a baseImg, but additionally has any number of additional images placed at the same location with their display set to none. I would like to have it so that while the image is moused-over, it starts a slideshow that will show each of the images in 3 second increments and just continue in a loop.  The naming convention for the images is as follows:
+
+first default image: <name>-base.jpg
+additional images: <name>-1.jpg
+                   <name>-2.jpg
+                   ...
+                   
+I'd also like for each card to be a uniform size, which they currently are not, but generally about the size that they currently are.  They should utilize the available space and have a 18px gap between the cards. Also make it so that clicking on a card will start the slideshow behavior and clicking again will stop it.
+
+# --------------------------------------------------------------------------------------------------------
+
+Looks great, but let's change one thing. So for the first image change, let's make that happen instantly.  So whether mousing over or clicking on it, the first image switches right then, and from that point forward changes as it does now every 3 seconds.  With no instant change, users won't know that the images change, as they will be unlikely to linger on an image for 3 seconds.
+
+# --------------------------------------------------------------------------------------------------------
+
+Perfect, now the next item. The frontend app uses header that is displayed on the top of the page, which contains a primitive navigation of the pages scrolling content.  This is great, but disappears as soon as the user starts scrolling.  I would rather have this header always be present and the scrollable area starts directly below it.  This way the navigation links can be used at any time during viewing any part of the page.
+
+# --------------------------------------------------------------------------------------------------------
+
+Let's also add one more section to the bottom of the page, which will be a way to contact me.  I've created a mock-up for that section, which I'll include the image of it.  It will have a deep purple background and contains a simple form consisting of 5 form fields. Use validation on the email address and phone number fields and when the form is submitted, it should email the full content to daveywalbeck@gmail.com.  To the side of the contact form is my key contact information.
+
+# --------------------------------------------------------------------------------------------------------
+
+Let's add a new backend endpoint that is going mimic the functionality of the /add-entry/ endpoint almost identically, with the difference being that instead of accepting a string, it will take an attached file instead.  It will then open the file, read the contents and then process that the same as the /add-entry endpoint.  This new endpoint will be as follows:
+
+method:     POST
+path:       /add-file
+headers:    Content-Type: multipart/form-data
+            Content-Length: xxx
+body:
+{
+    "file": <file>
+}
+
+response: HTTP Status code 200 on success
+
+# --------------------------------------------------------------------------------------------------------
+
+Add unit tests for the frontend application
+
+# --------------------------------------------------------------------------------------------------------
+
+Can you change the time interval on the frontend slideshow from 3 seconds to 2 seconds.  I don't think peoples attention span will be long enough.
+
+# --------------------------------------------------------------------------------------------------------
+
+Let's modify the frontend application so that it works using variables defined in a .env file.  The .env file should have the following variables:
+
+API_URL         the full URL of the API service
+
+
+# --------------------------------------------------------------------------------------------------------
+
+
+
+# --------------------------------------------------------------------------------------------------------
+
+
+
+# --------------------------------------------------------------------------------------------------------
+
+
+
+# --------------------------------------------------------------------------------------------------------
+
+
+
+# --------------------------------------------------------------------------------------------------------
+
+
+
+# --------------------------------------------------------------------------------------------------------
+
+
+
+# --------------------------------------------------------------------------------------------------------
+
+
+
+# --------------------------------------------------------------------------------------------------------
+
+
+
+# --------------------------------------------------------------------------------------------------------
+
+
+
+# --------------------------------------------------------------------------------------------------------
+
+
+
+# --------------------------------------------------------------------------------------------------------
+
+
+
+# --------------------------------------------------------------------------------------------------------
+
+
+
+# --------------------------------------------------------------------------------------------------------
+
+
+
+# --------------------------------------------------------------------------------------------------------
+
+
+
+# --------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
