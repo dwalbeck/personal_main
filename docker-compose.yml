@@ -1,0 +1,91 @@
+services:
+  api:
+    hostname: api.daveywalbeck.com
+    container_name: api.daveywalbeck.com
+    build:
+      context: backend/
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - '8000:8000'
+    expose:
+      - "8000"
+    env_file:
+      - backend/.env
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      1vision:
+        ipv4_address: 172.19.1.10
+    healthcheck:
+      test: [ "CMD", "curl", "-k", "-f", "http://localhost:8000" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    hostname: daveywalbeck.com
+    container_name: daveywalbeck.com
+    build:
+      context: frontend/
+      dockerfile: Dockerfile-dev
+    restart: always
+    expose:
+      - "5173"
+    ports:
+      - "80:5173"
+    environment:
+      NODE_ENV: production
+      CHOKIDAR_USEPOLLING: true
+    volumes:
+      - "./frontend:/app"
+    depends_on:
+      api:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+    networks:
+      1vision:
+        ipv4_address: 172.19.1.20
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5173/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  db:
+    image: axiosmedia/postgres-pgvector:15.8-0.7.3
+    container_name: pgsql.daveywalbeck.com
+    restart: always
+    env_file:
+      - ./db/.env
+    volumes:
+      - "pg_portfolio:/var/lib/postgresql/data"
+      - "./db/initdb:/docker-entrypoint-initdb.d"
+    networks:
+      1vision:
+        ipv4_address: 172.19.1.30
+    ports:
+      - "5431:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  frontend:
+    driver: local
+  pg_portfolio:
+    driver: local
+
+networks:
+  1vision:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.19.1.0/26"
+#          ip_range: 172.19.1.0/26
+#          gateway: 172.19.1.1
