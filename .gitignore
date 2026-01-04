@@ -2,4 +2,9 @@
 .idea
 .claude
 
+personal_api/.env
+
+personal_site/.env
+personal_site/dist
+
 ./db/.env

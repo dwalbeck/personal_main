@@ -1,9 +1,8 @@
 services:
   api:
-    hostname: api.daveywalbeck.com
-    container_name: api.daveywalbeck.com
+    container_name: api.dw.com
     build:
-      context: backend/
+      context: personal_api/
       dockerfile: Dockerfile
     restart: always
     ports:
@@ -25,10 +24,9 @@ services:
       retries: 5
 
   frontend:
-    hostname: daveywalbeck.com
-    container_name: daveywalbeck.com
+    container_name: dw.com
     build:
-      context: frontend/
+      context: personal_api/
       dockerfile: Dockerfile-dev
     restart: always
     expose:
@@ -56,7 +54,7 @@ services:
 
   db:
     image: axiosmedia/postgres-pgvector:15.8-0.7.3
-    container_name: pgsql.daveywalbeck.com
+    container_name: pgsql.dw.com
     restart: always
     env_file:
       - ./db/.env

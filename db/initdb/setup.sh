@@ -15,6 +15,6 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
     embedding VECTOR(1536) NOT NULL
   );
 
-  GRANT ALL PRIVILEGES ON DATABASE "portfolio-ai" TO apiuser;
+  GRANT ALL PRIVILEGES ON DATABASE "personal-ai" TO apiuser;
 
 EOSQL
