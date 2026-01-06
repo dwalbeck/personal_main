@@ -1,4 +1,4 @@
-# Portfolio Backend API
+# Personal Website Backend API
 
 A FastAPI-based backend service that powers a portfolio website with RAG (Retrieval-Augmented Generation) chatbot functionality. The API handles AI-powered conversations, contact form submissions, and portfolio content management using OpenAI embeddings and PostgreSQL with pgvector for semantic search.
 
@@ -307,12 +307,12 @@ docker compose up -d --build api
 
 ```bash
 # Build Docker image
-docker build -t portfolio-api .
+docker build -t personal-api .
 
 # Run container
 docker run -p 8000:8000 \
   --env-file .env \
-  portfolio-api
+  personal-api
 ```
 
 ### Docker Container Management
@@ -397,11 +397,11 @@ sudo nano /etc/nginx/sites-available/personal-api
 ```nginx
 server {
     listen 80;
-    server_name ps-api.daveywalbeck.com;
+    server_name ps-api.<your_domain>;
 
     # Admin endpoints - restricted by IP
     location ~ ^/(add-entry|add-file)/ {
-        allow YOUR.IP.ADDRESS.HERE;
+        allow <YOUR.IP.ADDRESS.HERE>;
         deny all;
 
         proxy_pass http://127.0.0.1:8000;
@@ -441,7 +441,7 @@ sudo systemctl reload nginx
 sudo apt install certbot python3-certbot-nginx
 
 # Obtain SSL certificate
-sudo certbot --nginx -d ps-api.daveywalbeck.com
+sudo certbot --nginx -d ps-api.<your_domain>
 
 # Certbot automatically updates Nginx config for HTTPS
 ```
@@ -450,7 +450,7 @@ sudo certbot --nginx -d ps-api.daveywalbeck.com
 
 For direct deployment without Docker:
 
-**Create systemd service** (`/etc/systemd/system/portfolio-api.service`):
+**Create systemd service** (`/etc/systemd/system/personal-api.service`):
 
 ```ini
 [Unit]
@@ -461,9 +461,9 @@ After=network.target postgresql.service
 Type=notify
 User=www-data
 Group=www-data
-WorkingDirectory=/opt/portfolio/backend
-Environment="PATH=/opt/portfolio/backend/venv/bin"
-ExecStart=/opt/portfolio/backend/venv/bin/gunicorn main:app -c gunicorn.conf.py
+WorkingDirectory=//var/www/personal_api
+Environment="PATH=/var/www/personal_api/venv/bin"
+ExecStart=/var/www/personal_api/venv/bin/gunicorn main:app -c gunicorn.conf.py
 ExecReload=/bin/kill -s HUP $MAINPID
 KillMode=mixed
 TimeoutStopSec=30
@@ -477,16 +477,16 @@ WantedBy=multi-user.target
 ```bash
 # Install service
 sudo systemctl daemon-reload
-sudo systemctl enable portfolio-api
+sudo systemctl enable personal-api
 
 # Start service
-sudo systemctl start portfolio-api
+sudo systemctl start personal-api
 
 # Check status
-sudo systemctl status portfolio-api
+sudo systemctl status personal-api
 
 # View logs
-sudo journalctl -u portfolio-api -f
+sudo journalctl -u personal-api -f
 ```
 
 ### Production Deployment Checklist
@@ -517,17 +517,17 @@ git pull
 docker compose up -d --build api
 
 # Or for systemd deployment
-sudo systemctl restart portfolio-api
+sudo systemctl restart personal-api
 
 # Verify service is running
 docker compose ps api
 # OR
-sudo systemctl status portfolio-api
+sudo systemctl status personal-api
 
 # Monitor logs
 docker compose logs -f api
 # OR
-sudo journalctl -u portfolio-api -f
+sudo journalctl -u personal-api -f
 ```
 
 ## Unit Testing
@@ -817,7 +817,7 @@ jobs:
 docker compose logs -f api
 
 # Systemd deployment
-sudo journalctl -u portfolio-api -f
+sudo journalctl -u personal-api -f
 
 # Application log file
 tail -f api.log

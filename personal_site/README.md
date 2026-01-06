@@ -1,4 +1,4 @@
-# Portfolio Frontend
+# Personal Website Frontend
 
 A modern, responsive portfolio website built with React, TypeScript, and Vite. This frontend application provides a clean, professional interface for showcasing skills, experience, and projects, with an integrated AI-powered chatbot for visitor interaction.
 
@@ -245,12 +245,12 @@ The recommended production setup uses Nginx to serve static files.
 
 ```bash
 # Copy production build to web root
-sudo mkdir -p /var/www/personal
-sudo cp -r dist/* /var/www/personal/
+sudo mkdir -p /var/www/personal_site
+sudo cp -r dist/* /var/www/personal_site/
 
 # Set permissions
-sudo chown -R www-data:www-data /var/www/personal
-sudo chmod -R 755 /var/www/personal
+sudo chgrp -R www-data /var/www/personal_site
+sudo chmod -R 755 /var/www/personal_site
 ```
 
 #### 2. Configure Nginx
@@ -315,7 +315,7 @@ sudo systemctl reload nginx
 sudo apt install certbot python3-certbot-nginx
 
 # Obtain SSL certificate
-sudo certbot --nginx -d daveywalbeck.com -d www.daveywalbeck.com
+sudo certbot --nginx -d <your_domain> -d www.<your_domain>
 
 # Certbot automatically updates Nginx config for HTTPS
 ```
@@ -325,7 +325,7 @@ sudo certbot --nginx -d daveywalbeck.com -d www.daveywalbeck.com
 - [ ] Update `.env` with production API URL
 - [ ] Build production bundle (`npm run build`)
 - [ ] Test build locally (`npm run preview`)
-- [ ] Copy files to `/var/www/personal/`
+- [ ] Copy files to `/var/www/personal_site/`
 - [ ] Configure Nginx with correct domain names
 - [ ] Set up SSL/TLS certificates
 - [ ] Test frontend loads correctly
@@ -349,7 +349,7 @@ npm install
 npm run build
 
 # Deploy new files
-sudo cp -r dist/* /var/www/personal/
+sudo cp -r dist/* /var/www/personal_site/
 
 # Clear browser cache or use hard refresh (Ctrl+F5)
 ```
@@ -564,7 +564,7 @@ The application provides a health check endpoint for monitoring:
 curl http://localhost:5173/health
 
 # Production
-curl https://daveywalbeck.com/health
+curl https://<your_domain>/health
 ```
 
 The health check works in all environments:
