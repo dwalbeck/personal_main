@@ -128,7 +128,7 @@ const Contact: React.FC = () => {
 
     return (
         <div id="contact" className="bg-purple-700 py-14">
-            <div className="w-3/4 max-w-3/4 ml-auto mr-auto">
+            <div className="w-2/3 max-w-3/4 ml-auto mr-auto">
                 <div className="text-center mb-10">
                     <h1 className="text-4xl font-light text-white mb-0 pb-8">Contact</h1>
                 </div>
@@ -244,7 +244,7 @@ const Contact: React.FC = () => {
                     </div>
 
                     {/* Contact Info */}
-                    <div className="lg:w-1/4 text-white space-y-6">
+                    <div className="lg:w-346 text-white space-y-6">
                         <div>
                             <h2 className="text-3xl font-bold mb-2">Davey Walbeck</h2>
                             <p className="text-xl font-light">Senior Software Architect</p>

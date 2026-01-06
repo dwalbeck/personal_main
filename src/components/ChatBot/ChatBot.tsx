@@ -103,7 +103,7 @@ const ChatBot: React.FC = () => {
           onClick={toggleChat}
           className="shadow-lg hover:scale-110 transition-transform duration-300 ease-in-out focus:outline-none"
         >
-          <img src="/chat.png" alt="Chat" className="w-20 h-20" />
+          <img src="/chat.png" alt="AI Assistant Agent" className="w-20 h-20" />
         </button>
       </div>
 
