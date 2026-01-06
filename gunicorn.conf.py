@@ -1,4 +1,4 @@
-"""Gunicorn configuration file for Portfolio API"""
+"""Gunicorn configuration file for Personal Website API"""
 import multiprocessing
 import os
 
@@ -43,11 +43,11 @@ reload = os.getenv("GUNICORN_RELOAD", "false").lower() == "true"
 # Pre-fork hooks
 def on_starting(server):
     """Called just before the master process is initialized."""
-    server.log.info("Starting Portfolio API with Gunicorn")
+    server.log.info("Starting Personal website API with Gunicorn")
 
 def on_reload(server):
     """Called to recycle workers during a reload via SIGHUP."""
-    server.log.info("Reloading Portfolio API workers")
+    server.log.info("Reloading Personal website API workers")
 
 def post_worker_init(worker):
     """Called just after a worker has been initialized."""
