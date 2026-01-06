@@ -2,7 +2,7 @@ FROM node:18-alpine AS base
 
 WORKDIR /app
 
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* /app/
 
 RUN \
 if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
@@ -15,9 +15,6 @@ RUN npm install
 
 COPY . /app/
 
-#RUN npm run build && npm install -g serve
-
 EXPOSE 5173
 
-#CMD ["serve", "-s", "dist"]
 CMD ["npm", "run", "dev"]

@@ -20,7 +20,10 @@ async def init_postgres() -> None:
             await register_vector(conn)
 
         conn_pool = await asyncpg.create_pool(
-            dsn=os.getenv("DATABASE_URL"), init=initalize_vector
+            dsn=os.getenv("DATABASE_URL"),
+            init=initalize_vector,
+            min_size=2,
+            max_size=5
         )
         logger.info("PostgreSQL connection pool created successfully.")
 
