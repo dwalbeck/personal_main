@@ -18,8 +18,8 @@ const ProjectList: React.FC = () => {
             websiteUrl="https://www.blueroof360.com/"
             listItems={[
                 "Evaluated current product and architect of redesigned improved modular replacement with added features and capabilities, engineered to handle scalability and the growing demands using the best suited technologies.",
-                "Integrated IoT devices for real-time data collection and analysis",
-                "Designed main code structure and oversaw the development of the native mobile application.",
+                "Integrated IoT devices for real-time data collection and analysis and remote access to all portal features",
+                "Designed main code structure and oversaw the development of the native mobile application, match feature for feature to the portal application",
                 "Removed third party paid dependency by switching to an open source mapping solution. This saved on recurring costs and functionally operated in a fraction of the time and had more features that we utilized, which enhanced our app.",
                 "Restructured both the hardware, software, and overall architecture for improved stability, redundancy, and security, which includes a combination of cloud servers, load balancers, dedicated servers, CDN storage, and networking of all elements.",
                 "Designed new schema and database, as well as wrote the migration script to move customers and all associated data from old system to new."
@@ -33,13 +33,13 @@ const ProjectList: React.FC = () => {
             websiteUrl="https://truenorthacademy.com/"
             githubUrl=""
             listItems={[
-              "Full featured Lead Management Tracking system, complete with reporting, dynamic list generation, scoring and reminders",
-              "Database schema design handling all clients, leads, employees, accounting, reporting, ad campaigns and more",
-              "Designed and implemented completely dynamic accounting system for interaction with any number of accounts, merchants, gateways, and partners for custom mapping and translation of data.",
-                "Deployed on prem Asterisk server and fully integrated call center into portal application with predictive dialing and call tracking, utilizing soft phones over VoIP on SIP channels and headsets",
-                "Configured and deployed several in-house servers for email, website hosting, primary and secondary DNS, dynamic DHCP for remote access and the network PDC",
-                "Generation of daily dynamic reports and trend recognition with graphic display and downloadable exports, essential of daily business operations",
-                "Multi-tier user authentication and validation system with per user and group permission setting and built-in breadcrumb and state management per session"
+              "Comprehensive lead management tracking system with reporting, dynamic list generation, lead scoring, and automated reminders",
+              "Designed and maintained database schemas supporting clients, leads, employees, accounting, reporting, advertising campaigns, and related operational data",
+              "Designed and implemented a fully dynamic accounting system enabling interaction with any number of accounts, merchants, gateways, and partners, supporting custom data mapping and translation.",
+                "DDeployed an on-premises Asterisk server and fully integrated the call center into the portal application, enabling predictive dialing and call tracking using softphones over VoIP on SIP channels with headsets",
+                "Configured and deployed multiple in-house servers to support email, web hosting, primary and secondary DNS, dynamic DHCP for remote access, and the network primary domain controller (PDC)",
+                "Produce daily dynamic reports with graphical trend analysis and downloadable exports to support essential business operations",
+                "Designed and implemented a multi-tier user authentication and validation system featuring per-user and group-level permissions, with built-in breadcrumb navigation and session-based state management"
             ]}
           />
 
@@ -50,11 +50,11 @@ const ProjectList: React.FC = () => {
             websiteUrl="https://portal.surepaylg.com/"
             githubUrl=""
             listItems={[
-              "Designed software and hardware architecture for project consisting of a PHP portal front end, NodeJS API back end, Redis server and PostgreSQL database server",
-              "Implemented code base frameworks, OAuth2 authentication, multi-tier session management and security implementation and enforcement",
-              "Designed and built underwriting logic engine which connects and uses data returned by DataX third party service",
-                "Dynamic PDF contact generation with tagging for client and official copy and storage to S3",
-                "Payment processing integration to multiple merchant gateways for ACH and CC transactions"
+              "Architected the software and hardware solution for a project featuring a PHP portal front end, a Node.js API back end, a Redis server, and a PostgreSQL database server",
+              "Implemented application frameworks, OAuth2-based authentication, and multi-tier session management, including security implementation and enforcement",
+              "Designed and built an underwriting logic engine that integrates and utilizes data returned by the DataX third-party service",
+                "Implemented dynamic PDF contract generation with distinct tagging for client and official copies, including automated storage in Amazon S3",
+                "Integrated payment processing with multiple merchant gateways to support ACH and credit card transactions"
             ]}
           />
             {/* Clicksite Builder Project */}
@@ -64,15 +64,29 @@ const ProjectList: React.FC = () => {
                 websiteUrl="https://clicksitebuilder.com/"
                 githubUrl=""
                 listItems={[
-                    "Domain name availability searching and automated registration, configuration and name service activation",
-                    "Graphic image generation using text, color selection and script-fu, replacing the Roxen server previously used",
-                    "Complete redesign of the DB schema from MySQL to PostgreSQL with full foreign key enforcement, index optimization and triggers, as well as scripted migration process",
-                    "Custom written bulk mailer capable of using dynamically populated content for dual HTML and text emails at a rate of 1 million / 5 mins",
-                    "Turnkey ecommerce solution for store front and purchase transaction, all automatically created from a product Excel import",
-                    "Email ad campaigns with full tracking and reporting, and list management and generation tools"
+                    "Domain name availability search, automated registration, configuration, and name service activation",
+                    "Developed graphic image generation capabilities using text input, color selection, and Script-Fu, replacing the previously utilized Roxen server",
+                    "Redesigned the database schema from MySQL to PostgreSQL, implementing full foreign key enforcement, index optimization, triggers, and a scripted migration process",
+                    "Developed a custom bulk email system capable of sending dynamically populated dual-format (HTML and plain text) messages at a throughput of up to 1 million emails every 5 minutes",
+                    "Delivered a turnkey e-commerce solution that automatically generates storefronts and processes purchase transactions directly from imported product Excel files",
+                    "Email advertising campaigns with comprehensive tracking and reporting, supported by robust list management and generation tools"
                 ]}
             />
-
+            {/* Offerweb Project */}
+            <ProjectItem
+                title="Offerweb"
+                description="Affiliate merchant tracking system for ads and campaigns"
+                websiteUrl="https://offerweb.com/"
+                githubUrl=""
+                listItems={[
+                    "Flexible, customizable payout structures spanning a wide range of targets, scopes, and calculation metrics, with dynamic scaling options",
+                    "Searchable payout histories by date, merchant, revenue, or site, each displaying the complete transaction chain",
+                    "Fully customizable commission, incentive, and rewards system with support for unlimited configurations",
+                    "Suppression lists can be enforced by email address, domain, or MAC address",
+                    "Provide real-time revenue reporting for marketing campaigns and affiliate partners",
+                    "Affiliate and sub-affiliate tracking for networks, including comprehensive downloadable reports"
+                ]}
+            />
         </div>
       </div>
     </div>
